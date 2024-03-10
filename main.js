@@ -4,6 +4,14 @@ function init(){
                     type: 'candlestick',
                     height: 350
                 },
+                plotOptions: {
+    candlestick: {
+      colors: {
+        upward: '#3C90EB',
+        downward: '#DF7D46'
+      }
+    }
+                        },
                 series: [{
                     data: [
                         // Contoh data. Anda perlu mengganti data ini dengan data sebenarnya dari Binance API
