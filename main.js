@@ -32,4 +32,4 @@ function init(){
             chart.render();
 }
 
-addventListener('DOMContentLoaded',init);
+addEventListener('DOMContentLoaded',init);
