@@ -1,5 +1,5 @@
 function init(){
-            var chartOptions = {
+            var chart = new ApexCharts(document.querySelector("#chart"), {
                 chart: {
                     type: 'candlestick',
                     height: 350
@@ -26,9 +26,9 @@ function init(){
                         enabled: true
                     }
                 }
-            };
+            });
 
-            var chart = new ApexCharts(document.querySelector("#chart"), chartOptions);
+            
             chart.render();
 }
 
