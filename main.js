@@ -1,3 +1,45 @@
+const axios = require('axios');
+
+async function getBinanceCandlestickData(symbol, interval, limit) {
+    try {
+        const response = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch data:', error);
+        return null;
+    }
+}
+
+function parseBinanceCandlestickData(data) {
+    const parsedData = data.map(candlestick => ({
+        timestamp: new Date(candlestick[0]).toISOString(),
+        open: parseFloat(candlestick[1]),
+        high: parseFloat(candlestick[2]),
+        low: parseFloat(candlestick[3]),
+        close: parseFloat(candlestick[4]),
+        volume: parseFloat(candlestick[5])
+    }));
+    return parsedData;
+}
+
+async function main() {
+    const symbol = 'BTCUSDT';
+    const interval = '5m';
+    const limit = 120;
+
+    const candlestickData = await getBinanceCandlestickData(symbol, interval, limit);
+    if (candlestickData) {
+        const parsedCandlestickData = parseBinanceCandlestickData(candlestickData);
+        parsedCandlestickData.forEach(candlestick => {
+            console.log(candlestick);
+        });
+    } else {
+        console.log('No data available');
+    }
+}
+
+main();
+
 function init(){
             var chart = new ApexCharts(document.querySelector("#chart"), {
                 chart: {
